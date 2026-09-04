@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://dgitq07qoiwma"]
+
+[ext_resource type="Texture2D" uid="uid://bcabppemdv268" path="res://icon.svg" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://bxkvv46ku4l1q" path="res://entities/player/Player.cs" id="1_abrql"]
+[ext_resource type="Script" uid="uid://cuiw85vtirvae" path="res://entities/player/RagdollBody.cs" id="2_sglur"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bb2e8"]
+radius = 62.69968
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w64wm"]
+radius = 145.82524
+
+[node name="Player" type="CharacterBody2D" unique_id=1408112704]
+input_pickable = true
+script = ExtResource("1_abrql")
+Speed = 100.0
+
+[node name="CleanerHitbox" type="CollisionShape2D" parent="." unique_id=546333475]
+position = Vector2(-0.5, 0)
+shape = SubResource("CircleShape2D_bb2e8")
+
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=1519970834]
+
+[node name="PlayerSounds" type="AudioStreamPlayer2D" parent="." unique_id=1281510499]
+
+[node name="ShowerFinder" type="Area2D" parent="." unique_id=767887824]
+
+[node name="ShowerableHitbox" type="CollisionShape2D" parent="ShowerFinder" unique_id=1689711340]
+shape = SubResource("CircleShape2D_w64wm")
+
+[node name="RagdollBody" type="RigidBody2D" parent="." unique_id=329123940]
+script = ExtResource("2_sglur")
+
+[node name="Body" type="Sprite2D" parent="RagdollBody" unique_id=545758271]
+texture = ExtResource("1_3vyb7")
+
+[node name="BodyCollision" type="CollisionPolygon2D" parent="RagdollBody" unique_id=185857014]
+polygon = PackedVector2Array(62, 62, -65, 65, -65, -63, 63, -63)
+
+[node name="RagdollHead" type="RigidBody2D" parent="." unique_id=1631107921]
+visible = false
+
+[node name="Head" type="Sprite2D" parent="RagdollHead" unique_id=1273703715]
+texture = ExtResource("1_3vyb7")
+
+[node name="HeadCollision" type="CollisionPolygon2D" parent="RagdollHead" unique_id=1346043421]
+polygon = PackedVector2Array(-31, -69, -52, -100, -29, -134, 24, -132, 46, -102, 27, -68)
+
+[node name="RagdollLeftArm" type="RigidBody2D" parent="." unique_id=459379435]
+visible = false
+
+[node name="LeftArm" type="Sprite2D" parent="RagdollLeftArm" unique_id=521461085]
+texture = ExtResource("1_3vyb7")
+
+[node name="LeftArmCollision" type="CollisionPolygon2D" parent="RagdollLeftArm" unique_id=1904356976]
+polygon = PackedVector2Array(-73, -37, -94, -36, -118, 74, -95, 76)
+
+[node name="RagdollRightArm" type="RigidBody2D" parent="." unique_id=976790177]
+visible = false
+
+[node name="RightArm" type="Sprite2D" parent="RagdollRightArm" unique_id=598485117]
+texture = ExtResource("1_3vyb7")
+
+[node name="RightArmCollision" type="CollisionPolygon2D" parent="RagdollRightArm" unique_id=477445255]
+polygon = PackedVector2Array(68, -40, 91, -41, 111, 82, 86, 84)
+
+[node name="RagdollLeftLeg" type="RigidBody2D" parent="." unique_id=397071937]
+visible = false
+
+[node name="LeftLeg" type="Sprite2D" parent="RagdollLeftLeg" unique_id=617108696]
+texture = ExtResource("1_3vyb7")
+
+[node name="LeftLegCollision" type="CollisionPolygon2D" parent="RagdollLeftLeg" unique_id=616890242]
+polygon = PackedVector2Array(-60, 79, -28, 79, -22, 211, -56, 210)
+
+[node name="RagdollRightLeg" type="RigidBody2D" parent="." unique_id=50714391]
+visible = false
+
+[node name="RightLeg" type="Sprite2D" parent="RagdollRightLeg" unique_id=1225747697]
+texture = ExtResource("1_3vyb7")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RagdollRightLeg" unique_id=1455634317]
+polygon = PackedVector2Array(19, 80, 51, 80, 55, 207, 24, 207)
