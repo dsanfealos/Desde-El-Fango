@@ -7,8 +7,7 @@ public partial class RagdollBody : RigidBody2D
     public Area2D MouseFindable;
     public RigidBody2D LeftArm;
     public RigidBody2D RightArm;
-    public RigidBody2D LeftLeg;
-    public RigidBody2D RightLeg;
+    public RigidBody2D Legs;
     private bool _isGrabbable = false;
     private bool _isGrabbed = false;
     [Export] public float DragSpeed = 5.0f;
@@ -18,8 +17,7 @@ public partial class RagdollBody : RigidBody2D
     {
         LeftArm = GetParent().GetNode<RigidBody2D>("RagdollLeftArm");
         RightArm = GetParent().GetNode<RigidBody2D>("RagdollRightArm");
-        LeftLeg = GetParent().GetNode<RigidBody2D>("RagdollLeftLeg");
-        RightLeg = GetParent().GetNode<RigidBody2D>("RagdollRightLeg");
+        Legs = GetParent().GetNode<RigidBody2D>("RagdollLegs");
     }
 
     public override void _Process(double delta)
@@ -30,32 +28,17 @@ public partial class RagdollBody : RigidBody2D
         if (_isGrabbed)
         {
             LinearVelocity = targetVelocity;
+            AngularVelocity = 0;
+            LeftArm.AngularVelocity = AngularVelocity;
+            RightArm.AngularVelocity = AngularVelocity;
+            Legs.AngularVelocity = AngularVelocity;
         }else if (Input.IsActionJustReleased("click"))
         {
-            
-            
-            //Sleeping = true;
-            /*if (LinearVelocity.X > 500 || LinearVelocity.Y > 500)
-            {
-                LinearVelocity = new Vector2(500,500);
-            }
-            else if (LinearVelocity.X < -300)
-            {
-                LinearVelocity = new Vector2(-300, targetVelocity.Y);
-            }
-            else
-            {
-                LinearVelocity *= 0.2f;                
-            }*/
             LinearVelocity *= 0.2f; 
 
             LeftArm.LinearVelocity = LinearVelocity;
             RightArm.LinearVelocity = LinearVelocity;
-            LeftLeg.LinearVelocity = LinearVelocity;
-            RightLeg.LinearVelocity = LinearVelocity;
-            GD.Print("Linear: " + LinearVelocity);
-            // LinearVelocity = targetVelocity;
-            // ApplyImpulse(LinearVelocity * -1);
+            Legs.LinearVelocity = LinearVelocity;
         }
     }
 

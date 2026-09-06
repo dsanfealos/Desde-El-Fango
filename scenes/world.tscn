@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://c21efff7fg53x"]
 
-[ext_resource type="PackedScene" uid="uid://dgitq07qoiwma" path="res://entities/player/player.tscn" id="1_nnsk1"]
-[ext_resource type="Texture2D" uid="uid://bcabppemdv268" path="res://icon.svg" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://dgitq07qoiwma" path="res://entities/player/Player.tscn" id="1_7g83o"]
+[ext_resource type="Texture2D" uid="uid://bcabppemdv268" path="res://icon.svg" id="2_d1c63"]
+[ext_resource type="PackedScene" uid="uid://dh5uuwtugqy16" path="res://scenes/Shower.tscn" id="3_1lgw5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bb2e8"]
 size = Vector2(128.24428, 181.33334)
 
 [node name="World" type="Node2D" unique_id=385164093]
 
-[node name="Player" parent="." unique_id=1408112704 instance=ExtResource("1_nnsk1")]
+[node name="Player" parent="." unique_id=1408112704 instance=ExtResource("1_7g83o")]
 position = Vector2(0, 10)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=641056216]
@@ -25,7 +26,7 @@ shape = SubResource("RectangleShape2D_bb2e8")
 [node name="FloorSprite" type="Sprite2D" parent="Floor" unique_id=1346103530]
 position = Vector2(0, 475)
 scale = Vector2(12.28125, 0.28125)
-texture = ExtResource("2_rwgxs")
+texture = ExtResource("2_d1c63")
 
 [node name="Wall1" type="StaticBody2D" parent="." unique_id=158425446]
 position = Vector2(-328.99994, -64.999985)
@@ -40,7 +41,7 @@ shape = SubResource("RectangleShape2D_bb2e8")
 [node name="Wall1Sprite" type="Sprite2D" parent="Wall1" unique_id=1717131466]
 position = Vector2(0, 475)
 scale = Vector2(12.28125, 0.28125)
-texture = ExtResource("2_rwgxs")
+texture = ExtResource("2_d1c63")
 
 [node name="Wall2" type="StaticBody2D" parent="." unique_id=635445621]
 position = Vector2(1287.0002, -61.999992)
@@ -55,4 +56,8 @@ shape = SubResource("RectangleShape2D_bb2e8")
 [node name="Wall2Sprite" type="Sprite2D" parent="Wall2" unique_id=769524469]
 position = Vector2(0, 475)
 scale = Vector2(12.28125, 0.28125)
-texture = ExtResource("2_rwgxs")
+texture = ExtResource("2_d1c63")
+
+[node name="Shower" parent="." unique_id=541597506 instance=ExtResource("3_1lgw5")]
+position = Vector2(-675, 231)
+scale = Vector2(1.4, 1.4)

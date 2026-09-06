@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dgitq07qoiwma"]
 
+[ext_resource type="Script" uid="uid://bxkvv46ku4l1q" path="res://entities/player/Player.cs" id="1_fmb3c"]
 [ext_resource type="Script" uid="uid://cuiw85vtirvae" path="res://entities/player/RagdollBody.cs" id="2_sglur"]
-[ext_resource type="Texture2D" uid="uid://cts1ke20q8iac" path="res://assets/torso.png" id="3_qiwj3"]
-[ext_resource type="Texture2D" uid="uid://dhgy835cl7e5y" path="res://assets/pierna_izquierda.png" id="4_26q78"]
-[ext_resource type="Texture2D" uid="uid://dwq8fpex6ydv3" path="res://assets/piernaderecha.png" id="5_bectd"]
-[ext_resource type="Texture2D" uid="uid://b4b6bmrljy5ss" path="res://assets/brazo_izquierdo.png" id="6_wvtmh"]
+[ext_resource type="Texture2D" uid="uid://d4e3hrge17f12" path="res://assets/BODY.png" id="3_4pwj0"]
+[ext_resource type="Texture2D" uid="uid://ce8sjuk3nfb2n" path="res://assets/PIERNAS.png" id="4_4pwj0"]
+[ext_resource type="Texture2D" uid="uid://crx7jcdbrt8y1" path="res://assets/FACES-sheet.png" id="4_fmb3c"]
 [ext_resource type="Texture2D" uid="uid://da6oh67ncenr5" path="res://assets/brazoderecho.png" id="7_7thud"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bb2e8"]
@@ -13,14 +13,110 @@ radius = 75.50662
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sglur"]
 size = Vector2(38, 138)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w64wm"]
-radius = 87.005745
+[sub_resource type="Animation" id="Animation_rl6fg"]
+resource_name = "Happy"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Face:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
 
-[node name="Player" type="CharacterBody2D" unique_id=1408112704]
+[sub_resource type="Animation" id="Animation_q57vx"]
+resource_name = "Meh"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Face:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_ak4un"]
+resource_name = "Nice"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Face:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_1ms0h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Face:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2rv2u"]
+resource_name = "Sad"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Face:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mq27t"]
+resource_name = "Wtf"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Face:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kwk8g"]
+_data = {
+&"Happy": SubResource("Animation_rl6fg"),
+&"Meh": SubResource("Animation_q57vx"),
+&"Nice": SubResource("Animation_ak4un"),
+&"RESET": SubResource("Animation_1ms0h"),
+&"Sad": SubResource("Animation_2rv2u"),
+&"Wtf": SubResource("Animation_mq27t")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=1408112704 groups=["Player"]]
 collision_layer = 2
 input_pickable = true
-
-[node name="Animation" type="AnimationPlayer" parent="." unique_id=1519970834]
+script = ExtResource("1_fmb3c")
 
 [node name="PlayerSounds" type="AudioStreamPlayer2D" parent="." unique_id=1281510499]
 
@@ -28,10 +124,11 @@ input_pickable = true
 position = Vector2(-1, 29)
 shape = SubResource("CircleShape2D_bb2e8")
 
-[node name="RagdollBody" type="RigidBody2D" parent="." unique_id=329123940]
+[node name="RagdollBody" type="RigidBody2D" parent="." unique_id=329123940 groups=["Player"]]
 mass = 2.0
 center_of_mass_mode = 1
 script = ExtResource("2_sglur")
+DragSpeed = 2.0
 
 [node name="MouseFinder" type="Area2D" parent="RagdollBody" unique_id=767887824]
 
@@ -40,85 +137,84 @@ position = Vector2(-2, 29)
 shape = SubResource("RectangleShape2D_sglur")
 
 [node name="Body" type="Sprite2D" parent="RagdollBody" unique_id=545758271]
-texture = ExtResource("3_qiwj3")
+position = Vector2(-1, 55)
+texture = ExtResource("3_4pwj0")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RagdollBody" unique_id=66911456]
-polygon = PackedVector2Array(-3, -107, -24, -100, -32, -82, -33, -64, -24, -51, -13, -45, -5, -44, -21, -38, -21, 86, -15, 98, -1, 105, 10, 100, 19, 88, 20, -37, 4, -43, 16, -46, 30, -60, 33, -71, 29, -89, 17, -103)
+polygon = PackedVector2Array(-2, -96, -20, -91, -30, -82, -33, -64, -24, -51, -13, -45, -5, -44, -21, -38, -21, 86, -15, 98, -1, 105, 10, 100, 19, 88, 20, -37, 4, -43, 16, -46, 30, -60, 33, -71, 27, -83, 14, -93)
 
-[node name="RagdollLeftLeg" type="RigidBody2D" parent="." unique_id=397071937]
-position = Vector2(29, 12)
+[node name="FaceAnimation" type="AnimationPlayer" parent="RagdollBody" unique_id=1095014985]
+libraries/ = SubResource("AnimationLibrary_kwk8g")
+
+[node name="Face" type="Sprite2D" parent="RagdollBody" unique_id=1577950295]
+position = Vector2(0, 56)
+texture = ExtResource("4_fmb3c")
+hframes = 5
+
+[node name="RagdollLegs" type="RigidBody2D" parent="." unique_id=397071937]
+position = Vector2(30.000002, 5)
 rotation = 0.04108413
-mass = 0.5
+mass = 5.0
 metadata/_edit_group_ = true
 
-[node name="LeftLeg" type="Sprite2D" parent="RagdollLeftLeg" unique_id=617108696]
-position = Vector2(-43, 139.46867)
+[node name="Legs" type="Sprite2D" parent="RagdollLegs" unique_id=617108696]
+position = Vector2(-26.962145, 123.21137)
+rotation = -0.04900267
 scale = Vector2(0.73913056, 0.9208155)
-texture = ExtResource("4_26q78")
+texture = ExtResource("4_4pwj0")
+vframes = 2
+frame = 1
 
-[node name="LeftLegCollision" type="CollisionPolygon2D" parent="RagdollLeftLeg" unique_id=616890242]
-position = Vector2(-41.45492, 145.40219)
-polygon = PackedVector2Array(-4.4232864, -68.45293, 5.6093464, -67.864494, 6.7878666, 58.193497, -5.24308, 57.68721)
+[node name="LegsCollision" type="CollisionPolygon2D" parent="RagdollLegs" unique_id=616890242]
+position = Vector2(-41.333397, 138.81482)
+rotation = -0.046436768
+scale = Vector2(1.0178283, 0.86650455)
+polygon = PackedVector2Array(-1.665184, -65.79296, 34.686203, -65.56441, 32.268997, 33.671158, 16.45482, 54.34514, 0.8299618, 33.473495)
 
-[node name="RagdollRightLeg" type="RigidBody2D" parent="." unique_id=50714391]
-position = Vector2(-22, 11)
-rotation = -0.028622532
-mass = 0.5
+[node name="RagdollLeftArm" type="RigidBody2D" parent="." unique_id=2017084324]
+position = Vector2(-159, -1.0000075)
+rotation = -0.5104059
+mass = 0.2
 metadata/_edit_group_ = true
 
-[node name="RightLeg" type="Sprite2D" parent="RagdollRightLeg" unique_id=1225747697]
-position = Vector2(36, 136)
-scale = Vector2(0.6956522, 0.9161289)
-texture = ExtResource("5_bectd")
+[node name="LeftArm" type="Sprite2D" parent="RagdollLeftArm" unique_id=1773893082]
+position = Vector2(100.82899, 26.655472)
+rotation = 0.5192971
+scale = Vector2(0.8720699, 0.7384726)
+texture = ExtResource("7_7thud")
+flip_h = true
+hframes = 2
+vframes = 2
+frame = 1
 
-[node name="RightLegCollision" type="CollisionPolygon2D" parent="RagdollRightLeg" unique_id=1455634317]
-position = Vector2(37.238094, 141.16402)
-polygon = PackedVector2Array(-8.238094, -62.164017, 1.7619057, -62.164017, 2.7619057, 63.835983, -9.238094, 63.835983)
-
-[node name="RagdollLeftArm" type="RigidBody2D" parent="." unique_id=1711321998]
-position = Vector2(45, -2.0000002)
-rotation = 0.47022456
-scale = Vector2(0.99999994, 0.99999994)
-mass = 0.5
-metadata/_edit_group_ = true
-
-[node name="LeftArm" type="Sprite2D" parent="RagdollLeftArm" unique_id=1459524560]
-position = Vector2(-75.607086, 61.66602)
-rotation = -1.549607
-scale = Vector2(0.9206506, 0.9921875)
-texture = ExtResource("6_wvtmh")
-
-[node name="LeftArmCollision" type="CollisionPolygon2D" parent="RagdollLeftArm" unique_id=148302409]
-position = Vector2(-74.73613, 49.02082)
-polygon = PackedVector2Array(-3.5392685, -50.742115, 8.093918, -49.924187, 7.952484, 64.5659, -7.2612762, 63.324306)
+[node name="LeftArmCollision" type="CollisionPolygon2D" parent="RagdollLeftArm" unique_id=842573327]
+position = Vector2(73.918396, 62.155632)
+polygon = PackedVector2Array(-12.458504, -55.250446, -12.528976, -63.31239, -6.1075974, -66.59354, 69.31538, -23.218779, 63.732494, -9.153524)
 
 [node name="RagdollRightArm" type="RigidBody2D" parent="." unique_id=222225588]
 position = Vector2(-42.999996, -1.9073486e-06)
 rotation = -0.5104059
-mass = 0.5
-metadata/_edit_group_ = true
+mass = 0.2
 
 [node name="RightArm" type="Sprite2D" parent="RagdollRightArm" unique_id=438717968]
-position = Vector2(72.32814, 54.81408)
-rotation = 1.5391372
-scale = Vector2(0.98029006, 0.9921875)
+position = Vector2(100.82899, 26.655472)
+rotation = 0.5192971
+scale = Vector2(0.8720699, 0.7384726)
 texture = ExtResource("7_7thud")
+hframes = 2
+vframes = 2
+frame = 1
 
 [node name="RightArmCollision" type="CollisionPolygon2D" parent="RagdollRightArm" unique_id=1408164922]
 position = Vector2(73.918396, 62.155632)
-polygon = PackedVector2Array(-8.82975, -65.825516, 1.4658127, -65.79147, 6.012985, 57.091885, -5.1551437, 56.569317)
+polygon = PackedVector2Array(-10.329403, -52.912308, -5.235058, -66.10502, 68.44284, -23.707306, 72.00349, -13.691231, 61.6034, -11.491659)
 
 [node name="Joints" type="Node2D" parent="." unique_id=764800273]
 
 [node name="JointLLeg" type="PinJoint2D" parent="Joints" unique_id=923517276]
-position = Vector2(-14, 92)
+position = Vector2(0, 87)
 node_a = NodePath("../../RagdollBody")
-node_b = NodePath("../../RagdollLeftLeg")
-
-[node name="JointRLeg" type="PinJoint2D" parent="Joints" unique_id=1855813543]
-position = Vector2(13, 93)
-node_a = NodePath("../../RagdollBody")
-node_b = NodePath("../../RagdollRightLeg")
+node_b = NodePath("../../RagdollLegs")
 
 [node name="JointLArm" type="PinJoint2D" parent="Joints" unique_id=1374185865]
 position = Vector2(-19, -31)
@@ -129,12 +225,6 @@ node_b = NodePath("../../RagdollLeftArm")
 position = Vector2(18, -33)
 node_a = NodePath("../../RagdollBody")
 node_b = NodePath("../../RagdollRightArm")
-
-[node name="ShowerFinder" type="Area2D" parent="." unique_id=1183469360]
-
-[node name="ShowerFinderCollision" type="CollisionShape2D" parent="ShowerFinder" unique_id=1753468943]
-position = Vector2(-2, 28)
-shape = SubResource("CircleShape2D_w64wm")
 
 [connection signal="mouse_entered" from="RagdollBody/MouseFinder" to="RagdollBody" method="OnMouseFinderMouseEntered"]
 [connection signal="mouse_exited" from="RagdollBody/MouseFinder" to="RagdollBody" method="OnMouseFinderMouseExited"]

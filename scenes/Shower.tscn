@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://dh5uuwtugqy16"]
+
+[ext_resource type="Script" uid="uid://bxxtab8n8wx3i" path="res://scenes/Shower.cs" id="1_x6k2h"]
+[ext_resource type="Texture2D" uid="uid://7nc548weie3r" path="res://assets/Ducha-sheet.png" id="2_id6ip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w64wm"]
+size = Vector2(127, 312)
+
+[sub_resource type="Animation" id="Animation_x6k2h"]
+resource_name = "Active"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_mq4iw"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_id6ip"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ic1bp"]
+_data = {
+&"Active": SubResource("Animation_x6k2h"),
+&"Idle": SubResource("Animation_mq4iw"),
+&"RESET": SubResource("Animation_id6ip")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bb2e8"]
+size = Vector2(93, 14)
+
+[node name="Shower" type="Node2D" unique_id=541597506]
+script = ExtResource("1_x6k2h")
+
+[node name="PlayerFinder" type="Area2D" parent="." unique_id=1025491129]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFinder" unique_id=907018473]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_w64wm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=451984449]
+position = Vector2(1.5000076, 0.99998546)
+scale = Vector2(0.45104897, 0.422043)
+texture = ExtResource("2_id6ip")
+hframes = 3
+
+[node name="ShowerAnimation" type="AnimationPlayer" parent="." unique_id=1881782596]
+libraries/ = SubResource("AnimationLibrary_ic1bp")
+
+[node name="Tap" type="StaticBody2D" parent="." unique_id=1767798307]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tap" unique_id=1964351736]
+position = Vector2(7, -95)
+shape = SubResource("RectangleShape2D_bb2e8")
+
+[connection signal="body_entered" from="PlayerFinder" to="." method="OnPlayerFinderBodyEntered"]
+[connection signal="body_exited" from="PlayerFinder" to="." method="OnPlayerFinderBodyExited"]
