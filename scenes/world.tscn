@@ -13,6 +13,7 @@ position = Vector2(0, 10)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=641056216]
 position = Vector2(0, 200)
+zoom = Vector2(0.625, 0.625)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1704258599]
 
@@ -22,6 +23,36 @@ scale = Vector2(12.28125, 0.28125)
 shape = SubResource("RectangleShape2D_bb2e8")
 
 [node name="FloorSprite" type="Sprite2D" parent="Floor" unique_id=1346103530]
+position = Vector2(0, 475)
+scale = Vector2(12.28125, 0.28125)
+texture = ExtResource("2_rwgxs")
+
+[node name="Wall1" type="StaticBody2D" parent="." unique_id=158425446]
+position = Vector2(-328.99994, -64.999985)
+rotation = 1.5699106
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1" unique_id=1969533958]
+position = Vector2(1.5000305, 482.5)
+scale = Vector2(12.28125, 0.28125)
+shape = SubResource("RectangleShape2D_bb2e8")
+
+[node name="Wall1Sprite" type="Sprite2D" parent="Wall1" unique_id=1717131466]
+position = Vector2(0, 475)
+scale = Vector2(12.28125, 0.28125)
+texture = ExtResource("2_rwgxs")
+
+[node name="Wall2" type="StaticBody2D" parent="." unique_id=635445621]
+position = Vector2(1287.0002, -61.999992)
+rotation = 1.5699106
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=2066967883]
+position = Vector2(1.5000305, 482.5)
+scale = Vector2(12.28125, 0.28125)
+shape = SubResource("RectangleShape2D_bb2e8")
+
+[node name="Wall2Sprite" type="Sprite2D" parent="Wall2" unique_id=769524469]
 position = Vector2(0, 475)
 scale = Vector2(12.28125, 0.28125)
 texture = ExtResource("2_rwgxs")
