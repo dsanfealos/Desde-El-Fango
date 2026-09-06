@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://7y855vmetegq"]
+
+[ext_resource type="Texture2D" uid="uid://cp1bc81eg4lqx" path="res://assets/Puerta-sheet.png" id="1_yfgsh"]
+[ext_resource type="Script" uid="uid://cimpljax4byls" path="res://scenes/Door.cs" id="2_eyv6f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w64wm"]
+size = Vector2(6, 64)
+
+[node name="Door" type="Sprite2D" unique_id=1780989561]
+texture = ExtResource("1_yfgsh")
+hframes = 2
+script = ExtResource("2_eyv6f")
+
+[node name="ClosedDoor" type="StaticBody2D" parent="." unique_id=1443271764]
+
+[node name="DoorCollision" type="CollisionShape2D" parent="ClosedDoor" unique_id=1096788200]
+position = Vector2(-13, 0)
+shape = SubResource("RectangleShape2D_w64wm")
